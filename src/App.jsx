@@ -1,14 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Card from './Card'
+import Form from './Form'
+import { useState } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [pedido, setPedido] = useState({})
 
+  const guardarPedido = (pedido, cantidad) => {
+    setPedido({pedido, cantidad})
+  }
   return (
     <>
-      <p>Listo para empezar</p>
+      <Form guardarPedido={guardarPedido} />
+
+      {Object.keys(pedido).length === 0 ? undefined : (
+        <Card
+          pedido={pedido.pedido}
+          cantidad={pedido.cantidad}
+        />
+      )}
     </>
   )
 }
